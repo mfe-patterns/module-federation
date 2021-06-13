@@ -59,12 +59,7 @@ export default function ProductList() {
 
   return (
     <React.Fragment>
-      <main>
-        {/* <Link to="/pricing">
-          <Button variant="contained" color="primary">
-            Pricing
-          </Button>
-        </Link> */}
+      <main>        
         <Container className={classes.cardGrid} >
           <Grid container spacing={4}>
             {products.map((product) => (

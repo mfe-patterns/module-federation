@@ -4,11 +4,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Catalog from './components/Catalog';
-import Cart from './components/Cart';
-
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
-
 const useStyles = makeStyles((theme) => ({
   header: {
     padding: '15px',
@@ -19,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default () => {
-
+export default ({ children }) => {
   const classes = useStyles();
+
   return (
-    <BrowserRouter>
+    <div>
       <header className={classes.header}>
         <Typography variant="h4" >
           FooBar.com
@@ -37,13 +32,9 @@ export default () => {
 
       <hr />
 
-      <Switch>
-        <Route exact path="/cart" component={Cart} />          
-        <Route path="/" component={Catalog} />      
-      </Switch>
+      {children}
 
       <hr />
-
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
           Footer
@@ -57,6 +48,6 @@ export default () => {
           Something here to give the footer a purpose!
         </Typography>
       </footer>
-    </BrowserRouter >
+    </div>
   )
-}
+};
