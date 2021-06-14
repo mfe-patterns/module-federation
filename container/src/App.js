@@ -25,9 +25,11 @@ export default () => {
   return (
     <BrowserRouter>
       <header className={classes.header}>
-        <Typography variant="h4" >
-          FooBar.com
-        </Typography>
+        <Link to="/">
+          <Typography variant="h4" >
+            FooBar.com
+          </Typography>
+        </Link>
         <Link to="/cart">
           <Button variant="contained" color="primary">
             Go to Cart
@@ -38,8 +40,8 @@ export default () => {
       <hr />
 
       <Switch>
-        <Route exact path="/cart" component={Cart} />          
-        <Route path="/" component={Catalog} />      
+        <Route exact path="/cart" component={Cart} />
+        <Route path="/" component={Catalog} />
       </Switch>
 
       <hr />
