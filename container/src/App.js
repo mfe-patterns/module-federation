@@ -12,6 +12,9 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   header: {
     padding: '15px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
