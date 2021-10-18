@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -23,19 +23,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default () => {
+  const [cartCount, setcartCount] = useState(0);
+
+  /* event listener start*/
+  document.getElementsByTagName('body')[0].addEventListener(
+    'addToCart',
+    () => {
+      setcartCount(cartCount + 1);
+    },
+    false
+  );
+  /* event listener end*/
 
   const classes = useStyles();
   return (
     <BrowserRouter>
       <header className={classes.header}>
-        <Link to="/">
-          <Typography variant="h4" >
-            FooBar.com
-          </Typography>
+        <Link to='/'>
+          <Typography variant='h4'>FooBar.com</Typography>
         </Link>
-        <Link to="/cart">
-          <Button variant="contained" color="primary">
-            Go to Cart
+        <Link to='/cart'>
+          <Button variant='contained' color='primary'>
+            Go to Cart {cartCount}
           </Button>
         </Link>
       </header>
@@ -43,25 +52,25 @@ export default () => {
       <hr />
 
       <Switch>
-        <Route exact path="/cart" component={Cart} />
-        <Route path="/" component={Catalog} />
+        <Route exact path='/cart' component={Cart} />
+        <Route path='/' component={Catalog} />
       </Switch>
 
       <hr />
 
       <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
+        <Typography variant='h6' align='center' gutterBottom>
           Footer
         </Typography>
         <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p"
+          variant='subtitle1'
+          align='center'
+          color='textSecondary'
+          component='p'
         >
           Something here to give the footer a purpose!
         </Typography>
       </footer>
-    </BrowserRouter >
-  )
-}
+    </BrowserRouter>
+  );
+};
