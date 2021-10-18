@@ -10,22 +10,36 @@ const devConfig = {
   devServer: {
     port: 8080,
     historyApiFallback: {
-      index: 'index.html'
-    }
+      index: 'index.html',
+    },
   },
   plugins: [
     new HtmlWelpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
     }),
     new ModuleFederationPlugin({
       name: 'container',
       remotes: {
-        'catalog': 'catalog@http://localhost:8081/remoteEntry.js',
-        'cart': 'cart@http://localhost:8082/remoteEntry.js'
+        catalog: 'catalog@http://localhost:8081/remoteEntry.js',
+        cart: 'cart@http://localhost:8082/remoteEntry.js',
       },
-      shared: packageJson.dependencies
-    })
-  ]
-}
+      shared: {
+        ...packageJson.dependencies,
+        react: {
+          singleton: true,
+          version: packageJson.dependencies.react,
+        },
+        'react-dom': {
+          singleton: true,
+          version: packageJson.dependencies['react-dom'],
+        },
+        'react-router-dom': {
+          singleton: true,
+          version: packageJson.dependencies['react-router-dom'],
+        },
+      },
+    }),
+  ],
+};
 
 module.exports = merge(commonConfig, devConfig);
