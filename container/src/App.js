@@ -33,6 +33,14 @@ export default () => {
     },
     false
   );
+
+  document.getElementsByTagName('body')[0].addEventListener(
+    'removeFromCart',
+    () => {
+      setcartCount(cartCount - 1);
+    },
+    false
+  );
   /* event listener end*/
 
   const classes = useStyles();

@@ -45,30 +45,36 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6),
   },
 }));
-
-
+const event = new Event('addToCart');
 export default function ProductList() {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
 
   useEffect(async () => {
-    const productList = await fetch('https://fakestoreapi.com/products').then(res => res.json());
+    const productList = await fetch('https://fakestoreapi.com/products').then(
+      (res) => res.json()
+    );
 
     setProducts(productList);
   }, []);
 
   const addToCart = (product) => () => {
-    const currentAddedProducts = JSON.parse(localStorage.getItem('products')) || [];
+    const currentAddedProducts =
+      JSON.parse(localStorage.getItem('products')) || [];
 
     console.log(currentAddedProducts);
 
-    localStorage.setItem('products', JSON.stringify([...currentAddedProducts, product]));
-  }
+    localStorage.setItem(
+      'products',
+      JSON.stringify([...currentAddedProducts, product])
+    );
+    document.getElementsByTagName('body')[0].dispatchEvent(event);
+  };
 
   return (
     <React.Fragment>
       <main>
-        <Container className={classes.cardGrid} >
+        <Container className={classes.cardGrid}>
           <Grid container spacing={4}>
             {products.map((product) => (
               <Grid item key={product.id} xs={12} sm={6} md={4}>
@@ -79,15 +85,17 @@ export default function ProductList() {
                     title={product.title}
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant='h5' component='h2'>
                       {product.title}
                     </Typography>
-                    <Typography>
-                      {product.description}
-                    </Typography>
+                    <Typography>{product.description}</Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary" onClick={addToCart(product)}>
+                    <Button
+                      size='small'
+                      color='primary'
+                      onClick={addToCart(product)}
+                    >
                       Add to Cart
                     </Button>
                   </CardActions>
