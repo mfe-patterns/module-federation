@@ -1,0 +1,31 @@
+{
+  "name": "module-federation",
+  "version": "1.0.0",
+  "description": "Microfrontends using Webpack Module Pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare-cart": "cd cart && npm i",
+    "prepare-catalog": "cd catalog && npm i",
+    "prepare-container": "cd container && npm i",
+    "prepare-all": "npm run prepare-cart && npm run prepare-catalog && npm run prepare-container",
+    "run-container": "cd container && npm start",
+    "run-catalog": "cd catalog && npm start",
+    "run-cart": "cd cart && npm start",
+    "start-all": "concurrently \"npm run run-container\" \"npm run run-catalog\" \"npm run run-cart\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfe-patterns/module-federation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mfe-patterns/module-federation/issues"
+  },
+  "homepage": "https://github.com/mfe-patterns/module-federation#readme",
+  "dependencies": {
+    "concurrently": "^7.2.2"
+  }
+}
