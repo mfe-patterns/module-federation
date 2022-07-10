@@ -10,12 +10,12 @@ const devConfig = {
   devServer: {
     port: 8081,
     historyApiFallback: {
-      index: 'index.html'
-    }
+      index: 'index.html',
+    },
   },
   plugins: [
     new HtmlWelpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
     }),
     new ModuleFederationPlugin({
       name: 'catalog',
@@ -23,10 +23,23 @@ const devConfig = {
       exposes: {
         './CatalogApp': './src/bootstrap',
       },
-      shared: packageJson.dependencies,
-    })
-  ]
-}
+      shared: {
+        ...packageJson.dependencies,
+        react: {
+          singleton: true,
+          version: packageJson.dependencies.react,
+        },
+        'react-dom': {
+          singleton: true,
+          version: packageJson.dependencies['react-dom'],
+        },
+        'react-router-dom': {
+          singleton: true,
+          version: packageJson.dependencies['react-router-dom'],
+        },
+      },
+    }),
+  ],
+};
 
 module.exports = merge(commonConfig, devConfig);
-
